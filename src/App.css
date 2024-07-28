@@ -20,3 +20,33 @@ audio::-webkit-media-controls-mute-button {
 audio::-webkit-media-controls-volume-slider {
     display: none !important;
 }
+.playTime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Control{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+.Control button{
+    display: flex;
+    margin: 10px;
+    padding:10px;
+    cursor: pointer;
+    outline: none;
+    border:none;
+    border-radius: .5rem;
+}
+.Control button:active{
+    outline: 1px solid black;
+}
+.Control button{
+    color:white;
+    background: rgb(47, 48, 47);
+}
+.Control button:nth-child(2){
+    color:white;
+    background: green;
+}

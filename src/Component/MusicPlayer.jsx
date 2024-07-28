@@ -6,8 +6,9 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 function MusicPlayer(){
   const [click, setClick] = useState(0);
   const audioRef = useRef('0');
-  const [playprogress,setPlayprogress] = useState(0);
-  const [duration,setDuration] = useState(audioRef.current.duration);
+  // const [playprogress,setPlayprogress] = useState(0);
+  const [duration,setDuration] = useState();
+  const [min,setMin] = useState(0);
   useEffect(()=>{
     if(click==1){
       load();
@@ -16,12 +17,12 @@ function MusicPlayer(){
         console.log("clear");
       }
     },[click,setClick]);
-
     function load(){
-      let sec = audioRef.current.duration;
-      var remainingSeconds = sec % 60;
-      console.log(Math.floor(sec/60)+ ":" + (remainingSeconds).toFixed(0));
+      // let sec = audioRef.current.duration;
+      // var remainingSeconds = sec % 60;
+      // console.log(Math.floor(sec/60)+ ":" + (remainingSeconds).toFixed(0));
     }
+
     // function playTime(){
     //   if(click==0){
     //     console.log(Math.floor(audioRef.current.currentTime));
@@ -33,18 +34,26 @@ function MusicPlayer(){
     if(click==0){
       audioRef.current.play();
       intervalId = setInterval(()=>{
+        setDuration((Math.floor(audioRef.current.currentTime)+1));
+          // if(duration>60){
+          //   setMin(min=>min+1)
+          //   setDuration((Math.floor(audioRef.current.currentTime)+1));
+          // }
           console.log(Math.floor(audioRef.current.currentTime));
-          setDuration(Math.floor(audioRef.current.currentTime));
+          if(Math.floor(audioRef.current.currentTime) == Math.floor(audioRef.current.duration)){
+            setClick(1);
+            console.log("reached");
+            clearInterval(intervalId);
+          }
         },1000);
-      setClick(1);
-    }
+        setClick(1);
+        }
     else{
       audioRef.current.pause();
       setClick(0);
       clearInterval(intervalId);
     }
   }
-  
    return (
     <>
       <div className="music_area">
@@ -53,14 +62,16 @@ function MusicPlayer(){
         <audio controlsList="nodownload noplaybackrate" ref={audioRef}>
           <source src="\Audio\music1.m4a"/>
         </audio>
-      <p>{duration}</p>  : <p>{Math.floor(audioRef.current.duration/60)+ ":" + (audioRef.current.duration%60).toFixed(0)}</p>
-        <div className="Controls">
+      <div className="playTime">
+      <p>{duration ? (duration<10?min  + " : "+ "0" + duration : min  + " : "+ duration):"00"} - {audioRef.current.duration?Math.floor(audioRef.current.duration/60)+ ":" + (audioRef.current.duration%60).toFixed(0): "00:00"}</p> 
+      </div>
+        <div className="Control">
           <button><FaAngleDoubleLeft/></button>
           <button onClick={PlayPause}>{click==0?<FaPlay/>:<FaPause/>}</button>
           <button><FaAngleDoubleRight/></button>
         </div>
       </div>
     </>
-   )
+   );
 }
 export default MusicPlayer;
