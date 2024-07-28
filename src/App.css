@@ -3,9 +3,18 @@
     top: 50%;
     left:50%;
     transform: translate(-50%,-50%);
+    width:50%;
 }
 .music_player{
-    border:1px solid black;
+    display: flex;
+    width:100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.player{
+    box-shadow: 1px 1px 2px rgb(85, 88, 85);
+    border-radius: .5rem;
+    margin:10px;
 }
 .music_area{
     display: flex;
@@ -49,4 +58,52 @@ audio::-webkit-media-controls-volume-slider {
 .Control button:nth-child(2){
     color:white;
     background: green;
+}
+.Music{
+  box-shadow: 1px 1px 2px rgb(10, 151, 232);
+  border-radius: .5rem;
+  padding: 0;
+  margin:0;
+}
+.Music h1 {
+    color: green;
+    text-align: center;
+    padding:10px;
+}
+.song_list{
+    display: flex;
+    overflow-y: scroll;
+    height: 200px;
+    max-height: 300px;
+    flex-direction: column;
+    align-items: center;
+    padding:0;
+    margin:0;
+}
+.song_list::-webkit-scrollbar {
+    display: none;
+}
+.song_list .song_{
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 2px rgb(158, 158, 158);
+    padding:0;
+    cursor: pointer;
+}
+.song_ img{
+    width:40px;
+    height:40px;
+    border-radius: .5rem;
+    padding: 0 6px;
+}
+.song_ h2{
+    font-size: 1rem;
+    padding:0 10px;
+    text-align: start;
+    width:100px;
+    text-transform: capitalize;
+}
+.song_ p{
+    font-size: 14px;
+    padding:0 10px;
 }
